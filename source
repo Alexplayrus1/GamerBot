@@ -1,0 +1,59 @@
+const express = require('express');
+const app = express();
+const port = 3000;
+const Database = require("@replit/database")
+
+
+
+app.get('/', (req, res) => res.send('~~ GamerBot Terms Of Use ~~ Please dont steal the code or anything! If you get a premium code or something like that DONT SHARE THE LINK! ~~ GamerBot Privacy Policy ~~ We dont store any of your personal data! And the bot is open source so you can get the open source at creators official page.-By Alexplayrus1 Year: 2021, hope you enjoy! Application for submitting premium codes is coming soon. Try it out, its currently in beta: https://discord.com/api/oauth2/authorize?client_id=857509606325747732&permissions=8&scope=bot'));
+app.get('/secret', (req, res) => res.send('Theres is no secret, https://GamerBot.alexplayrus1.repl.co/givemesecret'));
+app.get('/sus', (req, res) => res.send('sussy baka https://GamerBot.alexplayrus1.repl.co/chickennugget'));
+app.get('/TOS', (req, res) => res.send('TOS are at the home page please go back.'));
+app.get('/givemesecret', (req, res) => res.send('Theres is no secret please stop, https://GamerBot.alexplayrus1.repl.co/givemethefrickinsecret'));
+app.get('/givemethefrickinsecret', (req, res) => res.send('ok you should stop bruh'));
+app.get('/chickennugget', (req, res) => res.send('among nugget'));
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+// ================= START BOT CODE ===================
+const Discord = require('discord.js');
+const client = new Discord.Client();
+
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+client.user.setActivity("Say :commands")
+});
+
+client.on('message', msg => {
+  if (msg.content === ':commands') {
+    msg.reply(':linkforbot - gives you link to add bot to your server, :info - displays credits etc, :ban @victim - bans a specified member, :kick @victim - kicks a specified member (might be buggy)');
+  }
+});
+client.on('message', msg => {
+  if (msg.content === ':linkforbot') {
+    msg.reply('https://GamerBot.alexplayrus1.repl.co you can also visit our gdev page: http://gdev.renderforestsites.com/');
+  }
+});
+client.on('message', msg => {
+  if (msg.content === ':info') {
+    msg.reply('Coded in Replit, uses uptimerobot to keep bot 24/7 online, we are still working on it so expect more.');
+  }
+});
+client.on('message', async s4dmessage => {
+    if (String((s4dmessage.content)).includes(String(':ban'))) {
+       if(s4dmessage.member.hasPermission("BAN_MEMBERS")) {
+        (s4dmessage.mentions.members.first()).ban();
+    }
+    }
+});
+
+client.on('message', async s4dmessage => {
+    if (String((s4dmessage.content)).includes(String(':kick'))) {
+       if(s4dmessage.member.hasPermission("KICK_MEMBERS")) {
+        (s4dmessage.mentions.members.first()).kick();
+    }
+    }
+});
+
+// You really don't want your token here since your repl's code
+// is publically available. We'll take advantage of a Repl.it 
+// feature to hide the token we got earlier. 
+client.login(process.env.DISCORD_TOKEN);
